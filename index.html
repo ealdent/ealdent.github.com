@@ -1,10 +1,13 @@
-# Ealdent's GitHub Page
-
-## About Me
-
-My name is Jason Adams and I divide my online time between my blog, [The Mendicant Bug][mendicantbug]
-and [Twitter][twitter-ealdent].
-
-
-[mendicantbug]: http://mendicantbug.com
-[twitter-ealdent]: http://twitter.com/ealdent
+---
+layout: default
+title: The Mendicant Bug
+---
+ 
+<div id="home">
+  <h1>Blog Posts</h1>
+  <ul class="posts">
+    {% for post in site.posts %}
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
