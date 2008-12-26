@@ -3,7 +3,7 @@ layout: post
 title: Jekyll and Hyde
 ---
 
-I have settled on the decision of migrating my blog engine from [WordPress.com][:wordpress] (WPC) to [Jekyll][:jekyll].  There are a number of disadvantages of using WPC that have been bothering me, but the alternatives weren't much better.  One option I had was to share a slice with a couple friends running [WordPress.org][:wporg], but the tradeoff between WPC and WPO were not enough to really justify that.  I'll describe Jekyll after going through some advantages and disadvantages I'm currently facing.
+I have settled on the decision of migrating my blog engine from [WordPress.com][:wordpress] (WPC) to [Jekyll][:jekyll].  There are a number of disadvantages of using WPC that have been bothering me, but the alternatives weren't much better.  One option I had was to share a slice with a couple friends running [WordPress.org][:wporg], but the tradeoff between configurability and traffic boosts weren't enough to justify it.  I'll describe Jekyll after going through some advantages and disadvantages I'm currently facing.
 
 ### Advantages of WordPress.com
 
@@ -30,18 +30,19 @@ I have settled on the decision of migrating my blog engine from [WordPress.com][
 + Requires semi-serious web hosting service that would have to be paid for.
 + Offline editing is still an issue.
 
+So what do I really want in a blog engine?  I don't want a WYSIWYG editor. The only thing consistent about them is how their inconsistency annoys me.  I want good analytics.  I want complete control over _everything_.  I want it to be fast and I want it to be search-engine friendly.
+
+### Jekyll
+
+Jekyll is a very different sort of blog engine.  Its beauty is in its simplicity.  Instead of being a dynamic engine that hits the db whenever a request is made, the blog engine is more of a preprocessor.  You begin by creating a static file (or files) for each post.  Then you run Jekyll over it and it generates your new website as a set of static files.  Static files that can be quickly loaded without being passed through PHP or whatever.
+
+Jekyll lets you your write your posts using Textile or Markdown.  Markdown is my new favorite, and I'm using it to write this post.  Jekyll was written by one of the co-founders of GitHub, so it's open source, hosted on GitHub, and therefore is easy to fork.  And did I mention it's written in Ruby?
+
+GitHub pages basically acts as a Jekyll blog server.  As long as you obey the conventions of Jekyll, anything you push to your GHPages repo will be Jekyllified.  Free blog service!  I can edit and store all of my posts on my own machine with a safe backup on GitHub.  The free storage that comes with it is a bit more restrictive than with WordPress.com, but that's not really an issue for me since I use very little storage anyway.  I'm not saving video or a bunch of gigantic images.
+
+Jekyll is a great alternative for me that just works.
 
 
-I have been thinking of moving my blog for a while, but I hadn't chosen which engine would really suit me best.  I kicked around the idea of Blogspot as my main one, since it still has some nice layouts and lets you use javascript, while WPC does not.  I also considered the option of getting sharing a slice with some friends who host their own WordPress.org (WPO) blogs.  That was much more appealing and I almost went down that path, but WPC offers some extra traffic incentives (by being listed on the tags pages) that you can't get otherwise.  WPC has their basic SEO  stuff down and I get a steady stream of Google traffic.  Another advantage of WPC is the pretty detailed control panel you get.  Version 2.7 brought some very nifty UI enhancements and it runs a lot faster (for me) than it used to.
-
-There are also many disadvantages of using WPC.  The main one is
-the complete inability to use JavaScript.  This has been persistently annoying to me.
-I would like to add some stuff now and then and WPC locked me into a very small subset
-of aging widgets, most of which are for websites I've never heard of.  This is the single
-greatest failing of WPC in general and they would benefit from expanding their functionality
-in this arena.
-
-
-[:wordpress]: http://www.WPC
+[:wordpress]: http://www.wordpress.com
 [:jekyll]: http://mojombo.github.com/jekyll
 [:wporg]: http://www.wordpress.org
