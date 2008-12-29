@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Testing Post
-categories:
+tags:
 - testing
 - help
 - blagoblag

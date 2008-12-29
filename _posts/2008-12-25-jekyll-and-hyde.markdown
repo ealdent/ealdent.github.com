@@ -1,6 +1,15 @@
 ---
 layout: post
 title: Jekyll and Hyde
+tags:
+- blagoblag
+- jekyll
+- wordpress
+- blogging
+- markdown
+- git
+- github
+- github pages
 ---
 
 I have settled on the decision of migrating my blog engine from [WordPress.com][:wordpress] (WPC) to [Jekyll][:jekyll].  There are a number of disadvantages of using WPC that have been bothering me, but the alternatives weren't much better.  One option I had was to share a slice with a couple friends running [WordPress.org][:wporg], but the tradeoff between configurability and traffic boosts weren't enough to justify it.  I'll describe Jekyll after going through some advantages and disadvantages I'm currently facing.

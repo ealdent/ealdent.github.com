@@ -1,9 +1,6 @@
 ---
 layout: post
 title: Second Testing Post
-categories:
-- testing
-- do what?
 tags:
 - testing
 - checking
