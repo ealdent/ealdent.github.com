@@ -5,4 +5,4 @@ title: Second Testing Post
 
 Hello world.... help...
 
-{{site.categories}}
+{{post.categories}}
