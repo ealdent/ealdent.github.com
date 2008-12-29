@@ -6,4 +6,4 @@ title: Second Testing Post
 Hello world.... help...
 
 
-{{ post }}
+# {{ post.title }}
