@@ -7,7 +7,7 @@ layout: default
 
 <div id="tags">
   {% if page.tags %}
-    Filed under:  {{ page.tags | join: ", " }}.
+    Filed under:  {{ page.tags | sort | join: ", " }}.
   {% else %}
     Filed under:  Uncategorized.
   {% endif %}
