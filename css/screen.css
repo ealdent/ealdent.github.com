@@ -81,7 +81,7 @@ ul.posts span {
 .site {
   font-size: 110%;
   text-align: justify;
-  width: 40em;
+  width: 60em;
   margin: 3em auto 2em auto;
   line-height: 1.5em;
 }
@@ -152,6 +152,22 @@ ul.posts span {
   text-align: justify;
 }
 
+#post-date {
+  text-align: right;
+  font-size: 75%;
+  font-family: Verdana;
+  color: #aaa;
+}
+
+#post h1 {
+  font-size: 140%;
+}
+
+#post hr {
+  color: #a00;
+  margin-top: -5px;
+}
+
 /* standard */
 
 #post pre {
@@ -189,4 +205,14 @@ ul.posts span {
 
 #related h2 {
   margin-bottom: 1em;
+}
+
+#tags hr {
+  color: #a00;
+  margin-bottom: 8px;
+}
+
+#related hr {
+  color: #a00;
+  margin-bottom: 8px;
 }

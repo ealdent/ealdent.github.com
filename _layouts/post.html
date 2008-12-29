@@ -2,18 +2,20 @@
 layout: default
 ---
 <div id="post">
+  <h1>{{ page.title }}</h1>
+  <hr>
+  <div id="post-date">Published: {{ page.date | date_to_string }}</div>
   {{ content }}
 </div>
 
 <div id="tags">
-  {% if page.tags %}
-    Filed under:  {{ page.tags | sort | join: ", " }}.
-  {% else %}
-    Filed under:  Uncategorized.
-  {% endif %}
+  <hr>
+  <strong>Filed under:</strong>
+  {% if page.tags %}{{ page.tags | sort | join: ", " }}{% else %}Uncategorized{% endif %}.
 </div>
  
 <div id="related">
+  <hr>
   <h2>Related Posts</h2>
   <ul class="posts">
     {% for post in site.related_posts limit:3 %}
