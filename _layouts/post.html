@@ -3,10 +3,9 @@ layout: default
 ---
 <div id="post">
   {{ content }}
-  {{site.data}}
-  {% for category in post.categories %}
-    <!-- testing -->
-    <li><span>{{category}}</span></li>
+  
+  {% for post in site.categories.testing %}
+    <li><span>{{ post.title }}</span></li>
   {% endfor %}
 </div>
  
