@@ -5,6 +5,5 @@ title: Second Testing Post
 
 Hello world.... help...
 
-{% for categ in post.categories %}
-  <li>{{ categ }}</li>
-{% endfor %}
+
+{{ post }}
