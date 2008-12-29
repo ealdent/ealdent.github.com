@@ -7,10 +7,9 @@ layout: default
 
 <div id="tags">
   {% if page.tags %}
-    Tags:
-    {% for tag in page.tags %}
-      {{ tag }}, 
-    {% endfor %}
+    Filed under:  {{ page.tags | join: ", " }}.
+  {% else %}
+    Filed under:  Uncategorized.
   {% endif %}
 </div>
  
