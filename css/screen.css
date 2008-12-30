@@ -16,9 +16,12 @@ html, body {
 }
 
 body {
-  background-color: white;
-  font: 13.34px helvetica, arial, clean, sans-serif;
-  *font-size: small;
+  font-family:Verdana, Helvetica, Arial, sans-serif;
+  font-size:76%;
+  color:#545454;
+  background:#fff;
+  line-height:120%;
+  min-width:760px;
   text-align: center;
 }
 
@@ -87,18 +90,28 @@ ul.posts span {
 }
 
 .title {
-  color: #a00;
+  color: #666e7e;
   font-weight: bold;
-  margin-bottom: 2em;
+  font-size: 36pt;
+  margin-bottom: 0.5em;
+}
+
+.title-slug {
+  font-family: "Times new roman", "Serif";
+  color: #7f755d;
+  font-size: 14pt;
+  font-weight: normal;
+  margin-top: 20px;
+  font-style: italic;
 }
 
 .site .title a {
-  color: #a00;
+  color: #666e7e;
   text-decoration: none;
 }
 
 .site .title a:hover {
-  color: black;
+  color: #676f7f;
 }
 
 .site .title a.extra {
@@ -109,6 +122,32 @@ ul.posts span {
 
 .site .title a.extra:hover {
   color: black;
+}
+
+.posts a {
+  color: #666e7e;
+  text-decoration: none;
+}
+
+.posts a:active {
+  color: #666e7e;
+  text-decoration: none;
+}
+
+.posts a:visited {
+  color: #666e7e;
+  text-decoration: none;
+}
+
+.posts a:hover {
+  color: #333e7e;
+  text-decoration: underline;
+}
+
+.site .title-rss img {
+  border: 0;
+  float: right;
+  margin-top: -30px;
 }
 
 .site .meta {
@@ -198,6 +237,32 @@ ul.posts span {
 #post pre.terminal code {
   background-color: #333;
 }
+
+
+#post a {
+  color: #333e7e;
+  text-decoration: none;
+}
+
+#post a:active {
+  color: #333e7e;
+  text-decoration: none;
+}
+
+#post a:visited {
+  color: #333e7e;
+  text-decoration: none;
+}
+
+#post a:hover {
+  color: #666e7e;
+  text-decoration: underline;
+}
+
+#post ul {
+  list-style-position: inside;
+}
+
 
 #related {
   margin-top: 2em;
