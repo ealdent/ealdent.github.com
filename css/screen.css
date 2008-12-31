@@ -168,7 +168,12 @@ ul.posts span {
 }
 
 .site .footer .contact a {
-  color: #8085C1;
+  color: #666e7e;
+}
+
+.site .footer .contact a:hover {
+  color: #333e7e;
+  text-decoration: none;
 }
 
 .site .footer .rss {
