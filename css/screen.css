@@ -150,6 +150,10 @@ ul.posts span {
   margin-top: -30px;
 }
 
+.posts img {
+    border: 0;
+}
+
 .site .meta {
   color: #aaa;
 }
