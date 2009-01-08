@@ -272,6 +272,10 @@ ul.posts span {
   list-style-position: inside;
 }
 
+#post img {
+    border: 0;
+}
+
 
 #related {
   margin-top: 2em;
