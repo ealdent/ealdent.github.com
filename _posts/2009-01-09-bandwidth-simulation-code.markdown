@@ -158,7 +158,7 @@ if __name__ == '__main__':
 
 {% endhighlight %}
 
-This code is distributed under the ![BSD license](/images/40bsd.png "BSD license") [BSD license][:bsd].
+This code is distributed under the [![BSD license](/images/40bsd.png "BSD license") BSD license][:bsd].
 
 [:bwsim-post]: http://mendicantbug.com/2009/01/06/bandwidth-simulation/
 [:mendicantbug]: http://mendicantbug.com
