@@ -1,4 +1,12 @@
-# Bandwidth Simulation Python Code
+---
+layout: post
+title: Bandwidth Simulation Python Code
+tags:
+- bandwidth
+- simulations
+- python
+- code
+---
 
 This code accompanies [this post][:bwsim-post] on [my blog][:mendicantbug].
 
