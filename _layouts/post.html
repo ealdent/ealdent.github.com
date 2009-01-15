@@ -4,17 +4,11 @@ layout: default
 <div id="post">
   <h1>{{ page.title }}</h1>
   <hr>
+  <div id="tags">{% if page.tags %}{{ page.tags | sort | join: ", " }}{% else %}Uncategorized{% endif %}</div>
   <div id="post-date">Published: {{ page.date | date_to_string }}</div>
   {{ content }}
 </div>
 
-<div id="tags">
-  <hr>
-  <strong>Filed under:</strong>
-  {% if page.tags %}{{ page.tags | sort | join: ", " }}{% else %}Uncategorized{% endif %}.
-</div>
-
- 
 {% if site.related_posts.size > 0 %}
 <div id="related">
   <hr>
