@@ -151,7 +151,7 @@ ul.posts span {
 }
 
 .posts img {
-    border: 0;
+  border: 0;
 }
 
 .site .meta {
@@ -273,7 +273,7 @@ ul.posts span {
 }
 
 #post img {
-    border: 0;
+  border: 0;
 }
 
 
@@ -286,6 +286,7 @@ ul.posts span {
 }
 
 #tags hr {
+  font-size: 75%;
   color: #a00;
   margin-bottom: 8px;
 }
