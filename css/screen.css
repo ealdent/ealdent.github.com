@@ -311,9 +311,9 @@ ul.posts span {
 }
 
 #tag-bar td {
-  width: 75%;
+  margin: 0 75%;
 }
 
 #date-bar td {
-  width: 25%;
+  margin: 0 25%;
 }
