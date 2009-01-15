@@ -301,3 +301,19 @@ ul.posts span {
   color: #a00;
   margin-bottom: 8px;
 }
+
+#top-bar table {
+  border: 0;
+}
+
+#top-bar tr {
+  vertical-align: top;
+}
+
+#tag-bar td {
+  width: 75%;
+}
+
+#date-bar td {
+  width: 25%;
+}

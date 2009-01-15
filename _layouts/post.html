@@ -4,12 +4,12 @@ layout: default
 <div id="post">
   <h1>{{ page.title }}</h1>
   <hr>
-  <table border=0 cellspacing=5>
+  <table id="top-bar">
     <tr>
-      <td>
+      <td id="tag-bar">
         <div id="tags">{% if page.tags %}{{ page.tags | sort | join: ", " }}{% else %}Uncategorized{% endif %}</div>
       </td>
-      <td width="25%">
+      <td id="date-bar">
         <div id="post-date">Published: {{ page.date | date_to_string }}</div>
       </td>
     </tr>
