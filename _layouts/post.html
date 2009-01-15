@@ -4,8 +4,16 @@ layout: default
 <div id="post">
   <h1>{{ page.title }}</h1>
   <hr>
-  <div id="tags">{% if page.tags %}{{ page.tags | sort | join: ", " }}{% else %}Uncategorized{% endif %}</div>
-  <div id="post-date">Published: {{ page.date | date_to_string }}</div>
+  <table border=0 cellspacing=5>
+    <tr>
+      <td>
+        <div id="tags">{% if page.tags %}{{ page.tags | sort | join: ", " }}{% else %}Uncategorized{% endif %}</div>
+      </td>
+      <td>
+        <div id="post-date">Published: {{ page.date | date_to_string }}</div>
+      </td>
+    </tr>
+  </table>
   {{ content }}
 </div>
 
