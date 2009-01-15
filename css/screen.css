@@ -312,3 +312,7 @@ ul.posts span {
 #date-bar td {
   margin: 0 25%;
 }
+
+textarea.comments {
+  margin-bottom: 5px;
+}
