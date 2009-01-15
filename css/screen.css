@@ -166,11 +166,6 @@ ul.posts span {
   overflow: hidden;
 }
 
-.site .footer .contact {
-  float: left;
-  margin-right: 3em;
-}
-
 .site .footer .contact a {
   color: #666e7e;
 }
