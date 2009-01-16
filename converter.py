@@ -32,19 +32,19 @@ def parse_entry(entry):
     # post_date = time.strptime(entry.wp_post_date, "%Y-%m-%d %H:%M:%S")
     tags = [tag['term'] for tag in entry.tags if tag['term'] != u'Uncategorized']
     content = entry.content[0].value
-    link = "_posts/" + entry.link.split(".com")[1].replace("/", "-")
+    link = "_posts/" + entry.link.split(".com")[1][1:].replace("/", "-")
     
     print "Processing entry:  %s" % (title)
     
     f = open(link, 'w')
 
-    f.write("---\n")
-    f.write("layout: post\n")
-    f.write("title: %s\n" % (title))
-    f.write("tags:\n")
+    f.write(u"---\n")
+    f.write(u"layout: post\n")
+    f.write(u"title: %s\n" % (title))
+    f.write(u"tags:\n")
     for tag in tags:
-        f.write("- %s\n" % (tag))
-    f.write("---\n")
+        f.write(u"- %s\n" % (tag))
+    f.write(u"---\n")
     f.write(content)
 
     f.close()
