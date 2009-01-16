@@ -65,7 +65,7 @@ def parse_entry(entry):
             break
         youtube = content[idx:end_idx]
         youtube_link = youtube.split(u"youtube=")[1][:-1]
-        new_youtube = u"""<div class="youtube"><object width="425" height="344"><param name="movie" value="%s=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/Ni_rAamVP2s&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></div>""" % (youtube_link)
+        new_youtube = u"""<div class="youtube"><object width="425" height="344"><param name="movie" value="%s=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="%s&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></div>""" % (youtube_link, youtube_link)
         content = content.replace(youtube, new_youtube)
         print "Replaced youtube for %s." % (title)
         print "**********************************************************************"
