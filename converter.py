@@ -32,12 +32,12 @@ def parse_entry(entry):
     # post_date = time.strptime(entry.wp_post_date, "%Y-%m-%d %H:%M:%S")
     if entry.has_key('tags'):
         tags = [tag['term'] for tag in entry.tags if tag['term'] != u'Uncategorized']
-    else
+    else:
         tags = list()
     if len(tags) == 0:
         return None
     content = entry.content[0].value
-    link = "_posts/" + entry.link.split(".com")[1][1:-1].replace("/", "-") + ".markdown"
+    link = "_posts/" + entry.link.split(".com")[1][1:-1].replace("/", "-") + ".textile"
     
     print "Processing entry:  %s" % (title)
     
