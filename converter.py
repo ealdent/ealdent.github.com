@@ -38,6 +38,7 @@ def parse_entry(entry):
         return None
     content = entry.content[0].value
     link = "_posts/" + entry.link.split(".com")[1][1:-1].replace("/", "-") + ".html"
+    original_link = "http://ealdent.wordpress.com" + entry.link.split(".com")[1]
     
     print "Processing entry:  %s" % (title)
     
@@ -51,7 +52,7 @@ def parse_entry(entry):
     else:
         print "*******************************************************************************"
     f.write(u"---\n")
-    f.write(u"%s\n" % (content))
+    f.write(u"Original post can be found at:  %s<br /><br />\n%s\n" % (original_link, content))
 
     f.close()
     

@@ -3,6 +3,7 @@ layout: post
 title: "Presence versus frequency redux"
 tags: ["computational linguistics", "computational linguistics"]
 ---
+Original post can be found at:  http://ealdent.wordpress.com/2008/10/01/presence-versus-frequency-redux/<br /><br />
 <p>Well to answer the question I posed in <a href="http://mendicantbug.com/2008/09/30/is-presence-better-than-frequency/" target="_self">my last post</a>:  presence is indeed better than frequency!  My previous experiments led me to the opposite conclusion in contradiction of results published by Pang et al (2002).  It seems the voodoo I was missing was removing <a href="http://www.dcs.gla.ac.uk/idom/ir_resources/linguistic_utils/stop_words" target="_blank">stop words</a> and <em>then</em> length normalizing each vector.  This combination boosted classification accuracy for presence to 87.05% in my experiments.  That's close enough to Pang and Lee (2004) to satisfy me that it works.  Of course, I'm not implementing all the stuff they do in that paper, just the simple SVM stuff.</p>
 <p><strong>Update</strong>:  I forgot to mention that removing stop words and length normalizing did not improve tf-idf scores over the previous 86.8%.</p>
 
