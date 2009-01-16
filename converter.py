@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 
-import date
+import time
 import feedparser
 import sys
 
@@ -61,6 +61,10 @@ def process_feed(feed):
 
 
 if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print "Usage:  %s <feed file>" % (sys.argv[0])
+        sys.exit(0)
+    
     feed = load_feed(sys.argv[1])
     process_feed(feed)
 
