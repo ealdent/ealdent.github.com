@@ -29,7 +29,7 @@ def parse_entry(entry):
     #  title => title of post
     #  content => actual post
     title = entry.title
-    date = date.strptime(entry.wp_post_date, "%Y-%m-%d %H:%M:%S")
+    # post_date = time.strptime(entry.wp_post_date, "%Y-%m-%d %H:%M:%S")
     tags = [tag['term'] for tag in entry.tags if tag['term'] != u'Uncategorized']
     content = entry.content[0].value
     link = "_posts/" + entry.link.split(".com")[1].replace("/", "-")
