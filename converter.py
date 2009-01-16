@@ -53,18 +53,36 @@ def parse_entry(entry):
         print "*******************************************************************************"
     f.write(u"---\n")
     
-    idx = -2
+    # replace youtube links
+    idx = -1
     while True:
-        idx = content.find("[youtube=", idx + 1)
-        if idx == -1:
+        idx = content.find(u"[youtube=", idx + 1)
+        if idx < 0:
             break
-        end_idx = content.find("]", idx) + 1
-        if end_idx == -1:
+        print "\t\tFOUND YOUTUBE"
+        end_idx = content.find(u"]", idx) + 1
+        if end_idx < 0:
             break
         youtube = content[idx:end_idx]
-        youtube_link = youtube.split("youtube=")[1][:-1]
-        new_youtube = """<div class="youtube"><object width="425" height="344"><param name="movie" value="%s=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/Ni_rAamVP2s&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></div>""" % (youtube_link)
+        youtube_link = youtube.split(u"youtube=")[1][:-1]
+        new_youtube = u"""<div class="youtube"><object width="425" height="344"><param name="movie" value="%s=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/Ni_rAamVP2s&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></div>""" % (youtube_link)
         content = content.replace(youtube, new_youtube)
+        print "Replaced youtube for %s." % (title)
+        print "**********************************************************************"
+    
+    # replace captions
+    idx = -1
+    while True:
+        idx = content.find(u"[caption", idx + 1)
+        if idx < 0 :
+            break
+        print "\t\tFOUND CAPTION"
+        end_idx = content.find(u"]", idx) + 1
+        if end_idx < 0:
+            break
+        content = content.replace(content[idx:end_idx], u" ")
+        print "Replaced caption for %s." % (title)
+        print "**********************************************************************"
     
     f.write(u"<hr /><br />Original post can be found at:  <a href=\"%s\" target=\"_blank\">%s</a><br /><br />\n%s\n" % (original_link, original_link, content))
 
