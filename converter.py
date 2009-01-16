@@ -13,6 +13,7 @@ def load_feed(feed_filename):
     f = open(feed_filename, 'r')
     txt = f.read()
     f.close()
+    txt = txt.decode('utf-8')
     
     print "Parsing feed..."
     feed = feedparser.parse(txt)
