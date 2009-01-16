@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-
-import time
+import codecs
 import feedparser
 import sys
+import time
 
 
 
@@ -13,7 +13,6 @@ def load_feed(feed_filename):
     f = open(feed_filename, 'r')
     txt = f.read()
     f.close()
-    txt = txt.decode('utf-8')
     
     print "Parsing feed..."
     feed = feedparser.parse(txt)
@@ -31,13 +30,16 @@ def parse_entry(entry):
     #  content => actual post
     title = entry.title
     # post_date = time.strptime(entry.wp_post_date, "%Y-%m-%d %H:%M:%S")
-    tags = [tag['term'] for tag in entry.tags if tag['term'] != u'Uncategorized']
+    if entry.has_key('tags'):
+        tags = [tag['term'] for tag in entry.tags if tag['term'] != u'Uncategorized']
+    else:
+        tags = list()
     content = entry.content[0].value
     link = "_posts/" + entry.link.split(".com")[1][1:].replace("/", "-")
     
     print "Processing entry:  %s" % (title)
     
-    f = open(link, 'w')
+    f = codecs.open(link, 'w', 'utf-8')
 
     f.write(u"---\n")
     f.write(u"layout: post\n")
@@ -46,7 +48,7 @@ def parse_entry(entry):
     for tag in tags:
         f.write(u"- %s\n" % (tag))
     f.write(u"---\n")
-    f.write(content)
+    f.write(u"%s" % (content), )
 
     f.close()
     
