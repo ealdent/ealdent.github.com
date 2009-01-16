@@ -35,7 +35,7 @@ def parse_entry(entry):
     else:
         tags = [u'Uncategorized']
     content = entry.content[0].value
-    link = "_posts/" + entry.link.split(".com")[1][1:-1].replace("/", "-") + ".html"
+    link = "_posts/" + entry.link.split(".com")[1][1:-1].replace("/", "-") + ".textile"
     
     print "Processing entry:  %s" % (title)
     
@@ -43,12 +43,12 @@ def parse_entry(entry):
 
     f.write(u"---\n")
     f.write(u"layout: post\n")
-    f.write(u"title: %s\n" % (title))
+    f.write(u"title: \"%s\"\n" % (title))
     f.write(u"tags:\n")
     for tag in tags:
-        f.write(u"- %s\n" % (tag))
+        f.write(u"- \"%s\"\n" % (tag))
     f.write(u"---\n")
-    f.write(u"%s" % (content), )
+    f.write(u"%s" % (content))
 
     f.close()
     
