@@ -37,7 +37,7 @@ def parse_entry(entry):
     if len(tags) == 0:
         return None
     content = entry.content[0].value
-    link = "_posts/" + entry.link.split(".com")[1][1:-1].replace("/", "-") + ".textile"
+    link = "_posts/" + entry.link.split(".com")[1][1:-1].replace("/", "-") + ".html"
     
     print "Processing entry:  %s" % (title)
     
