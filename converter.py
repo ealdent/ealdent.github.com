@@ -35,7 +35,7 @@ def parse_entry(entry):
     else:
         tags = [u'Uncategorized']
     content = entry.content[0].value
-    link = "_posts/" + entry.link.split(".com")[1][1:-1].replace("/", "-")
+    link = "_posts/" + entry.link.split(".com")[1][1:-1].replace("/", "-") + ".html"
     
     print "Processing entry:  %s" % (title)
     
