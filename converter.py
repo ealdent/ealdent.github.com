@@ -33,9 +33,9 @@ def parse_entry(entry):
     if entry.has_key('tags'):
         tags = [tag['term'] for tag in entry.tags if tag['term'] != u'Uncategorized']
     else:
-        tags = [u'Uncategorized']
+        return None
     content = entry.content[0].value
-    link = "_posts/" + entry.link.split(".com")[1][1:-1].replace("/", "-") + ".textile"
+    link = "_posts/" + entry.link.split(".com")[1][1:-1].replace("/", "-") + ".markdown"
     
     print "Processing entry:  %s" % (title)
     
@@ -44,15 +44,26 @@ def parse_entry(entry):
     f.write(u"---\n")
     f.write(u"layout: post\n")
     f.write(u"title: \"%s\"\n" % (title))
-    f.write(u"tags:\n")
-    for tag in tags:
-        f.write(u"- \"%s\"\n" % (tag))
+    if len(tags) > 0:
+        f.write(u"tags: [%s]\n" % (', ').join(["\"%s\"" % (tag) for tag in tags]))
+    else:
+        print "*******************************************************************************"
     f.write(u"---\n")
-    f.write(u"%s" % (content))
+    f.write(u"%s\n" % (content))
 
     f.close()
     
     print "Finished writing new post:  %s" % (link)
+
+
+# def parse_entry(entry):
+#     # given an entry turn into a proper post
+#     #  url => YYYY-MM-DD-slug-words-blah.html
+#     #  tags => list of tags
+#     #  title => title of post
+#     #  content => actual post
+#     title = entry.title
+#     print title
 
 
 
