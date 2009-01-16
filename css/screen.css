@@ -316,3 +316,8 @@ ul.posts span {
 textarea.comments {
   margin-bottom: 5px;
 }
+
+.youtube {
+  text-align: center;
+  float: center;
+}

@@ -81,6 +81,7 @@ def parse_entry(entry):
         if end_idx < 0:
             break
         content = content.replace(content[idx:end_idx], u" ")
+        content = content.replace(u"[/caption]", u" ")
         print "Replaced caption for %s." % (title)
         print "**********************************************************************"
     
