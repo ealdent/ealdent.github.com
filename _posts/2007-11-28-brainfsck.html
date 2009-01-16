@@ -1,0 +1,36 @@
+---
+layout: post
+title: "brainfsck"
+tags: ["brainfuck", "brainfuck", "code", "code", "compilers", "compilers", "computer science", "computer science", "programming", "programming", "programming languages", "programming languages"]
+---
+<p align="justify">Either the coolest or the stupidest <a href="http://esoteric.voxelperfect.net/wiki/Brainfuck" target="_blank">programming language</a> in the world, <a href="http://en.wikipedia.org/wiki/Brainfuck" target="_blank">brainfuck</a> was designed by Urban Müller in order to create the world's smallest compiler of a Turing-complete programming language.  Originally his compiler was 240 bytes in size, but he <a href="http://www.muppetlabs.com/~breadbox/bf/" target="_blank">reportedly</a> got it down to about 200 bytes.  Others have gotten it below that.  The language consists of only 8 operations, which I will go into after the jump.</p>
+<p align="justify"><!--more-->Operations:</p>
+
+<ul>
+	<li>&gt;   increment the current pointer</li>
+	<li>&lt;   decrement the current pointer</li>
+	<li>+   increment the byte at the current pointer</li>
+	<li>-   decrement the byte at the current pointer</li>
+	<li>.    output the byte at the current pointer</li>
+	<li>,    input a byte and store it at the current pointer</li>
+	<li>[    jump forward past the matching ] if the byte at the current pointer is zero</li>
+	<li>]    jump backward to the matching [ unless the byte at the current pointer is zero</li>
+</ul>
+<p align="justify">So the fun part is coming up with the smallest program possible written in brainf*** for a given task.  For example, you can write a Hello World program like so:</p>
+
+<pre><code>&gt;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++.+++++++++++++++++++++++++++++.+++++++..+++.-----------
+----------------------------------------------------------------
+----.+++++++++++++++++++++++++++++++++++++++++++++++++++++++.+++
++++++++++++++++++++++.+++.------.--------.</code></pre>
+<p align="justify">This increments or decrements a pointer to the ASCII value for each character and prints the output.  The first string of +'s increments the byte at the pointer until it reaches the ASCII value for 'H' and then outputs it.  Successive increments and decrements produce the rest of the characters.  Alternatively, you can create temporary variables for the pointers to the ASCII characters and then use those to print the output.  This results in a much smaller implementation than the original.</p>
+
+<pre><code>++++++++++[&gt;+++++++&gt;++++++++++&gt;+++&gt;+&lt;&lt;&lt;&lt;-]&gt;++.&gt;+.+++++++..+++.&gt;+
++.&lt;&lt;+++++++++++++++.&gt;.+++.------.--------.</code></pre>
+<p align="justify">Unfortunately, brainfrack isn't sufficient to be a fully functioning programming language for actual use.  There are no facilities for I/O beyond stdin and stdout.  So any file manipulation is done by redirecting stdin and stdout.  You can't do any sorts of graphics or interact with ports.  But it's a fun toy with which you can make some of the most mind-boggling code imaginable.</p>
+<p align="justify">Related stuff:</p>
+
+<ul>
+	<li><a href="http://esoteric.sange.fi/brainfuck/compiled/win/BFI.exe" target="_blank">brainfuck for Windows</a> at the <a href="http://esoteric.sange.fi/brainfuck/" target="_blank">brainfuck archive</a></li>
+	<li><a href="http://www.dmoz.org/Computers/Programming/Languages/Brainfuck/" target="_blank">brainfuck resources</a> from the Open Directory Project</li>
+</ul>

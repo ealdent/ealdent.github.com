@@ -1,0 +1,52 @@
+---
+layout: post
+title: "The Noob's Guide to Parsing"
+tags: ["computational linguistics", "computational linguistics", "how-to", "how-to", "java", "java", "natural language processing", "natural language processing", "nlp", "nlp", "parsing", "parsing", "phpsyntaxtree", "phpsyntaxtree", "tutorial", "tutorial"]
+---
+<p align="justify">So you want to automatically parse sentences without having to go through all the trouble of figuring it out for yourself?  You've come to the right place.  This brief tutorial is aimed at students who are interested in computer science and linguistics who maybe want to dip their feet in the water of computational linguistics without having to understand immediately all of the daunting details.  In other words, what I wish I had two years ago before applying to graduate school.</p>
+<!--more-->
+<h3><strong>What is Parsing?</strong></h3>
+<p align="justify">&nbsp;</p>
+<p align="justify">Parsing can mean many things.  In this case, it means taking a sentence of natural language (say English) and producing a list of parts of speech (noun, verb, etc) and arranging those parts into meaningful phrases.   If you have studied linguistics at all, you already know this.  If you haven't studied linguistics, you probably know this without knowing it.  Think about the following sentence:</p>
+<p align="center">The scared cat jumped over the confused dog.</p>
+<p align="justify">You probably recognize the subject of the sentence as <em>The scared cat</em> and what the cat jumps over as <em>the confused dog</em>.  These are noun phrases.  The second noun phrase can be combined with the preposition <em>over </em>to form a prepositional phrase, which describes the act of jumping done by the cat.  This combines with the verb to make a verb phrase.  In computational linguistics, there are many applications for having this sort of knowledge about a sentence.</p>
+<p align="justify">Now, we can do this automatically using a <em>parser</em>.  Most parsers today are probabilistic, meaning they build up a statistical model from real world data (sentences written by humans).  Many were trained from the <a href="http://www.cis.upenn.edu/~treebank/" title="Penn Treebank" target="_blank">Penn Treebank</a>, which are 40,000 sentences from the Wall Street Journal and Brown Corpus that were annotated by a group of people at the University of Pennsylvania.  By hand, they parsed these sentences in a consistent (mostly) format that could be read by a computer.  Using this information about the structure of English, we can assign probabilities to certain grammatical rules and use those probabilities to guess which would be the best thing to do with sentences that we have never seen before.</p>
+
+<h3>Finding a Parser</h3>
+<p align="justify">There are many parsers out there.  Most of the modern parsers perform about the same, some faster, some slightly more accurate.  For the purposes of this tutorial we will focus on one freely available, platform independent, open source parser.  The <a href="http://nlp.stanford.edu/downloads/lex-parser.shtml" title="Stanford Parser - a statistical, open-source, parser" target="_blank">Stanford Parser</a> is written in Java, so all you need to use it is right out of the box is Java 1.5 or higher.  The parser is oriented towards being used in a linux environment, but it will work fine on a Windows or Mac machine assuming you have the correct version of Java.</p>
+
+<h3>Running the Parser</h3>
+<p align="justify">The Stanford Parser can be called from the command line to parse files of sentences, but it also comes with a GUI that lets you open a file or a web page.  To run the GUI, go to the folder where you unzipped the parser and type the following line:</p>
+<p align="center">java -server -mx600m -cp "stanford-parser.jar" edu.stanford.nlp.parser.ui.Parser</p>
+<p align="justify"> Once the GUI opens, click the "Load Parser" button.</p>
+<p align="justify">&nbsp;</p>
+<p><img src="http://ealdent.files.wordpress.com/2007/10/loadparser.png" alt="Stanford Parser menu" /></p>
+<p align="justify">Navigate to the folder where you unzipped the parser and choose the file englishPCFG.ser.gz (any of the files ending in .ser.gz are parsers, so feel free to play around).  The Stanford Parser supports multiple languages including Arabic, Chinese, English and German.  The parser in this example is the English Probabilistic Context-Free Grammar parser.  Explaining just what that means goes beyond the scope of this little how-to, which focuses simply on getting you to the point where you can produce trees.</p>
+<p align="justify">Once you have chosen the parser, click the "Load File" button.  You can enter the URL of a web page you want to parse or enter your own file.  Or instead you can just start typing in the top box.  Select the sentence you want to parse and click the "Parse" button.  Your parse tree will appear in the bottom box.</p>
+<p align="center">&nbsp;</p>
+<p><img src="http://ealdent.files.wordpress.com/2007/10/subfeed.png" alt="Parse tree for the sentence \“Now go subscribe to my feed.\”" /></p>
+
+<h3>Evaluating the Parser</h3>
+This part is a little bit trickier.  Let's say you need to find out how well the parser is doing.  One common tool for determining this is called <a href="http://nlp.cs.nyu.edu/evalb/" title="evalb - tool for evaluating the output of a parser" target="_blank"><em>evalb</em></a>.   The reason this is tricky is because you need a set of test sentences that are already parsed according to the formalism used by your parser.  The parses output by the Stanford Parser look like this:
+
+(ROOT
+&nbsp;&nbsp;(S
+&nbsp;&nbsp;&nbsp;&nbsp;(ADVP&nbsp;(RB&nbsp;Now))
+&nbsp;&nbsp;&nbsp;&nbsp;(VP&nbsp;(VB&nbsp;go)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(VP&nbsp;(VB&nbsp;subscribe)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(PP&nbsp;(TO&nbsp;to)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(NP&nbsp;(PRP$&nbsp;my)&nbsp;(NN&nbsp;feed)))))
+&nbsp;&nbsp;&nbsp;&nbsp;(.&nbsp;.)))
+
+So you have to hand-annotate some number of sentences yourself.  I'd recommend you take a look at the <a href="ftp://ftp.cis.upenn.edu/pub/treebank/doc/manual/root.ps.gz" title="manual for the penn treebank using treebank II bracketing" target="_blank">manual</a> for the Penn Treebank and the <a href="ftp://ftp.cis.upenn.edu/pub/treebank/doc/tagguide.ps.gz" title="tagging guide to the Penn Treebank" target="_blank">tagging guide</a>.  Nothing is ever easy, right?  So once you have hand-coded annotations and the output from the Stanford Parser, you will need to create two files.  The gold standard file contains your hand-coded annotations.  The test file contains the output of the parser.  You have to remove all the line breaks from the files so that there is only one parse per line.  Then you can run evalb using the following command:
+<p align="center">evalb -p new.prm gold.txt test.txt</p>
+I know this works for Linux.  I think it works for Windows as well, but you might have some trouble compiling it.
+
+The output of the evaluation tool will tell you things like bracketing precision<a href="http://en.wikipedia.org/wiki/Precision_%28information_retrieval%29" title="precision" target="_blank"></a>, bracketing recall, bracketing f-measure, number of crossing brackets and tagging accuracy.  Check out the Wikipedia article on Information Retrieval for information about <a href="http://en.wikipedia.org/wiki/Recall_%28information_retrieval%29#Performance_measures" title="Precision, recall, and f-measure in information retrieval" target="_blank">precision, recall, and f-measures</a>.  What is being evaluated here is how often the brackets predicted match what the brackets actually should be.  Tagging accuracy is the accuracy of the parser in choosing the correct part of speech for each word.
+<h3>More on Trees</h3>
+Another tool you can use to create trees from the bracketed output of a parser (perhaps to help you write your gold standard files for evalb) is the <a href="http://ironcreek.net/phpsyntaxtree/" title="phpSyntaxTree - create parse trees from bracketed input" target="_blank">phpSyntaxTree project</a>.   While you can't use the parantheses from the parser output, it's an easy thing to substitute square brackets.  The output is a nice, clean tree.
+
+<p align="center">[S [NP [DT The] [NN output]] [VP [VBZ is] [NP [DT a] [ADJP [JJ nice] [, ,] [JJ clean]] [NN tree]]] [. .]]
+<img src="http://ealdent.files.wordpress.com/2007/10/syntaxtree1.png" alt="Syntax tree made using phpSyntaxTree" />
+<h3>Final Notes</h3>
+I have gone through the trouble of posting this tutorial because I hope I eventually help someone trying to explore the interesting world of parsing.  If you find any parts of the tutorial confusing, wrong, outdated, or have any other questions, please leave me a comment.   I expect I have made at least a few mistakes in my description.  Please let me know, no matter how minute.</p>

@@ -1,0 +1,46 @@
+---
+layout: post
+title: "Old English Translator"
+tags: ["computational morphology", "computational morphology", "dictionaries", "dictionaries", "historical linguistics", "historical linguistics", "languages", "languages", "machine translation", "machine translation", "morphology", "morphology", "old english", "old english", "open source", "open source"]
+---
+<p align="justify">[digg=http://digg.com/programming/Old_English_Translator]Phil Barthram recently announced on the <a href="http://www.rochester.edu/englisc/" target="_blank">ENGLISC</a> mailing list a new <a href="http://www.ethendun.plus.com/saxon/saxon-translator.htm" target="_blank">Old English translator</a>.  For those unfamiliar with Old English, this is not the really cheap malt liquor.  This is the grandmother of Modern English (by way of its mother, Middle English and a few others, chiefly Norman French).  Whereas an Olde English (the malt liquor) translator might look like this:</p>
+
+<blockquote>"You look pretty."
+"I'm trashed on cheap swill."</blockquote>
+<p align="justify">an Old English (Anglo-Saxon) translator looks more like:</p>
+
+<blockquote>Nu sculon herigean heofonrıces weard
+Now we should praise the guardian of the kingdom of heaven</blockquote>
+<p align="justify">This is the first line of Cædmon's Hymn.  Check out the wikipedia page for <a href="http://en.wikipedia.org/wiki/C%C3%A6dmon" target="_blank">Cædmon</a> to read the whole nine lines.</p>
+<p align="justify"><!--more-->The tool offers the user the ability to get dictionary look-ups of inflected Old English words.  So this is a word-for-word translator with no regard to context.  So in the realm of Old English machine translation, this is the first step.  This is called a direct translation system in the hierarchy of MT since it looks only at words at not at syntax or semantics when offering translations.  A sister method is statistical machine translation, which looks at co-occurrence probabilities between the source and target languages (Old English/Modern English) to suggest word and phrase matches.</p>
+<p align="justify">I've been considering for a while now working on such a system for Old English as a pet project.  Lack of time is the major hurdle there.  I've also been continuing (slowly) to work on a <a href="http://www.cs.cmu.edu/~jmadams/NLPLabProject.pdf" target="_blank">morphological analyzer for Old English verbs</a> (and extending it to nouns, adjectives, etc).</p>
+<p align="justify">The way Phil handles morphology is in the pre-processing phase.  He has taken several Modern English to Old English  (and vice versa) dictionaries and extracted inflected forms from the format they encode.  He then populates the database with each inflected form as a separate entry, tagged with the proper morphological information.  At query time, he checks for variations in acutes and also returns <em>similar</em> matches.</p>
+<p align="justify">Unfortunately (for me), he does not intend to take the code open source.  I certainly understand his desire to keep this as his own project, and he has put <strong>a lot</strong> of work into it.  I hope at some point he'll release the data as an xml dictionary.  One of the problems with open source projects for the hobbyist is the sudden overhead in managing the project combined with the fact that niche creations like this don't attract very many collaborators.  So you get more work with no benefit.</p>
+<p align="justify">Using Phil's translator to translate the first line of Cædmon's hymn:</p>
+
+<p align="justify"><font color="#ff0000"><strong>nú</strong></font> Interjection
+Derived from: <font color="#0000ff"><strong>lo! behold!  come!  ~ lá now    </strong></font>
+</p><p align="justify">sculon (failed to translate)</p>
+<p align="justify">herigean (failed to translate)</p>
+
+<p align="justify"><font color="#ff0000"><strong>heofon</strong></font> Masculine Noun - irregular ending
+Derived from: <font color="#0000ff"><strong>heofon m (-es/heofenas)  f (-e/-a) sky  firmament  heaven  the power of heaven </strong></font>
+Case(s) with this inflected ending:
+&gt; Nominative Singular
+&gt; Accusative Singular
+
+</p><p align="justify">rices (failed to translate, genetive form of <em>rice</em>, which did translate)
+<font color="#ff0000"><strong>rice</strong></font> Strong Neuter Noun
+Derived from: <font color="#0000ff"><strong>rice n (-es/-) BT la. add :-- On middeweardum hire rice hió getimbrede </strong></font>
+Case(s) with this inflected ending:
+&gt; Nominative Singular
+&gt; Nominative Plural
+&gt; Accusative Singular
+&gt; Accusative Plural
+
+</p><p align="justify"><font color="#ff0000"><strong>weard</strong></font> Strong Masculine Noun
+Derived from: <font color="#0000ff"><strong>weard m (-es/-as) keeper  watchman  guard  guardian  protector  2 lord  king  2 possessor     </strong></font>
+Case(s) with this inflected ending:
+&gt; Nominative Singular
+&gt; Accusative Singular
+</p><p align="justify">So Phil still has some work to do (and I know he's going to be working on cleaning up the UI, since up to now he's been focused on the underlying stuff).</p>

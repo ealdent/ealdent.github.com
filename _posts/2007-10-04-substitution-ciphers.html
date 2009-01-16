@@ -1,0 +1,58 @@
+---
+layout: post
+title: "Substitution Ciphers"
+tags: ["ciphers", "ciphers", "code", "code", "cryptograms", "cryptograms", "cryptography", "cryptography", "encryption", "encryption", "python", "python", "substitution cipher", "substitution cipher"]
+---
+For one of my homework assignments, I have to solve words encrypted via a substitution cipher.  These ciphers were insecure before computers came around, but they are still fun.  If you're unfamiliar with them, you'd probably recognize them as the cryptograms ("Cryptoquote") in your local newspaper.  In the simplest form, each letter is mapped to a different letter of the alphabet.  A lot of people do these for fun and I know at least <a href="http://melinda.theweatherses.org/" title="Melinthropy" target="_blank">one person</a> reading this does.  The result is a run of text that might look like:
+
+<p align="center"> <tt>ov umy rfgs f nmg</tt>
+<tt>MY DOG EATS A LOT</tt>
+
+There are many ways of going about solving substitution ciphers, but a common way is by counting frequencies of characters.  As most people know, <em>e </em>tends to occur more than other letters in most written English.  The rest of the letters typically follow a pattern, as well, but that pattern degenerates once you leave the most common letters.  The domain of the text you are examining is fundamentally important here.  By domain I mean whether this text is from a newspaper, an IM, transcribed speech, etc.  You can also look at bigrams, two character sequences, to find the most commonly appearing sequences.  In English, <em>th</em> appears much more <em>ty</em>, but <em>ty</em> still occurs.  When trying to solve substitution ciphers this way, you are essentially matching the frequency distribution of the cipher text to the distribution of English and building a mapping from there.  To put that a different way, you are matching up the most common letters or sequences in the garbled text with the most common real English letters or sequences.
+
+Once the frequency counts have revealed the most common letters, many people proceed to deduction to eliminate the rest.  Of course, this requires knowledge of English words directly, which has an impact on computational approaches to solving substitution ciphers automatically.  I'm curious what approaches people have taken (if any) other than using a dictionary of English words and trying to find matches from there.
+
+<!--more-->
+So, I'll talk more about this later, after the homework assignment is due, but there is an interesting connection here with finite state transducers.  Here is a little bit of python code to do some simple stuff with substitution ciphers in case you want to play around.  I have found python a very handy tool in decrypting these ciphers.  Anyone have any other tool they like and want to share?
+
+[sourcecode language='python']
+def decrypt(words, charmap):
+&nbsp;&nbsp;&nbsp;&nbsp;# Given the ciphertext in lowercase (words) and a
+&nbsp;&nbsp;&nbsp;&nbsp;# mapping of ciphertext to upper case plaintext
+&nbsp;&nbsp;&nbsp;&nbsp;# (charmap), return the transformed string
+&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;tmp = [" "] * len(words)
+&nbsp;&nbsp;&nbsp;&nbsp;for x in xrange(len(words)):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if charmap.has_key(words[x]):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tmp[x] = charmap[words[x]]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tmp[x] = words[x]
+
+&nbsp;&nbsp;&nbsp;&nbsp;return tmp
+
+
+
+def encrypt(words, charmap):
+&nbsp;&nbsp;&nbsp;&nbsp;# begin by making a reverse map
+&nbsp;&nbsp;&nbsp;&nbsp;rev_charmap = dict()
+&nbsp;&nbsp;&nbsp;&nbsp;for key in charmap:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rev_charmap[charmap[key]] = key
+
+&nbsp;&nbsp;&nbsp;&nbsp;return decrypt(words, rev_charmap)
+
+
+
+def make_random_charmap():
+&nbsp;&nbsp;&nbsp;&nbsp;letters = list()
+&nbsp;&nbsp;&nbsp;&nbsp;# make the list of uppercase letters
+&nbsp;&nbsp;&nbsp;&nbsp;for x in xrange(26):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;letters.append(chr(ord('A') + x))
+&nbsp;&nbsp;&nbsp;&nbsp;random.shuffle(letters)
+&nbsp;&nbsp;&nbsp;&nbsp;charmap = dict()
+&nbsp;&nbsp;&nbsp;&nbsp;for x in xrange(26):
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;charmap[chr(ord('a') + x)] = letters[x]
+
+&nbsp;&nbsp;&nbsp;&nbsp;return charmap
+[/sourcecode]
+
+And I'm only semi-fond of this plugin for source code.  It does some weird crap and is really temperamental.</p>

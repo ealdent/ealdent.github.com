@@ -1,0 +1,10 @@
+---
+layout: post
+title: "This is why I love linux #372"
+tags: ["grep", "grep", "linux", "linux", "logs", "logs", "ruby on rails", "ruby on rails", "tail", "tail"]
+---
+<p>Let's say you want to monitor the output of a log file while a process is running.  One easy way to do that is <code>tail -f my.log</code>.  As lines of text are passed into the log file, they will be displayed on the screen.  Very handy!  But let's say this is a central log file for something like Ruby on Rails.  Not only are the important logs that you want to track being sent to the log file, but so are a bajillion MySQL queries and other crap.  The other crap is so overwhelming that the only way you can use the log file is by grepping it for some identifier you put in the important logs.</p>
+
+So I figured, why not combine them?
+<blockquote><code>tail -f my.log | grep "my-identifier"</code></blockquote>
+<p>To be honest, I wasn't even sure it would work...  But sure enough, the magic happened.  The log file is filtered and only the stuff you want to see is displayed.  Any other nifty ideas out there for doing log monitoring?</p>

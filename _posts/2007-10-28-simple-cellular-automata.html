@@ -1,0 +1,209 @@
+---
+layout: post
+title: "Simple Cellular Automata"
+tags: ["books", "books", "cellular automata", "cellular automata", "code", "code", "computer science", "computer science", "experiments", "experiments", "python", "python", "wolfram", "wolfram"]
+---
+<p align="justify">[digg=http://digg.com/programming/Simple_Cellular_Automata]</p>
+<p align="justify">So I've been reading <a href="http://www.amazon.com/gp/redirect.html?ie=UTF8&location=http%3A%2F%2Fwww.amazon.com%2FNew-Kind-Science-Stephen-Wolfram%2Fdp%2F1579550088%3Fie%3DUTF8%26s%3Dbooks%26qid%3D1193591006%26sr%3D8-1&tag=themenbug-20&linkCode=ur2&camp=1789&creative=9325">A New Kind of Science</a><img src="http://www.assoc-amazon.com/e/ir?t=themenbug-20&l=ur2&o=1" border="0" height="1" width="1" /> by Stephen Wolfram, the creator of Mathematica.  It was hyped up big time back when he first wrote it, since he had gone silent for a number of years, hinting that he was about to do something <strong>big<em>.</em></strong>  So my middle little sister got me the book for Christmas (cuz she rocks) and I cracked it open a few times.  It's about 846 pages of text (yipes!) and then another 351 pages of notes.  Quite daunting.  So I put it down and have meant to pick it back up a thousand times.  Today I was needing a diversion because a particular C++ issue was giving me fits.</p>
+<p align="justify">&nbsp;</p>
+<p align="justify">In Chapter 2, Wolfram introduces a fairly simple 2-dimensional cellular automata (one spatial dimension, one temporal dimension).  The temporal dimension can be plotted as another spatial dimension producing a nice little spreadsheet style graph.  Each cell of the graph can be considered a bit.  Depending on whether the bit is set, the cell is either shaded or not.  So the single line in the spatial dimension contains some initial setting.  Let's say there is one single bit set in the middle of the line, so it might look like this:</p>
+<p align="center"> 000000000010000000000</p>
+<p align="left"><!--more--></p>
+<p align="justify"> To move to the next time step, we must look at the neighborhood of each cell.  A neighborhood for the middle cell of length 3 would be [010].  Another way of thinking about this neighborhood is as the bits of a number.  Here we have three bits so we can represent the numbers 0-7.  For each possible setting, we can create a rule.  The rule simply says whether the bit is set or not.  So let's use the following rules:</p>
+
+<ul>
+	<li>0 =&gt; 0</li>
+	<li>1 =&gt; 1</li>
+	<li>2 =&gt; 0</li>
+	<li>3 =&gt; 1</li>
+	<li>4 =&gt; 1</li>
+	<li>5 =&gt; 0</li>
+	<li>6 =&gt; 1</li>
+	<li>7 =&gt; 0</li>
+</ul>
+<p align="justify">As we step through our board, we look at the neighborhood of three for each cell.  Let's assume wrapping occurs at the edges, so for the first cell, the neighborhood is [000].  Most are zeros until we get to the 10th index (bolded, neighborhood underlined):</p>
+<p align="center">00000000<u><strong>0</strong>01</u>0000000000</p>
+<p align="justify"> The neighborhood now is [001], which corresponds to 1 in our rules.  So we output 1 in our new line.  The next neighborhood is 010, which corresponds to rule 2.  So we output 0.  Next we have [100], which is rule 4, so we output 1.  After we're done processing this line, we have the new line at time step 2:</p>
+<p align="center">000000000101000000000</p>
+ As we iterate through this ten more times, we begin to notice a pattern emerging:
+
+<p align="center"><code>000000000010000000000
+000000000101000000000
+000000001000100000000
+000000010101010000000
+000000100000001000000
+000001010000010100000
+000010001000100010000
+000101010101010101000
+001000000000000000100
+010100000000000001010
+100010000000000010001</code>
+
+Actually, it's probably harder to notice in this crappy text form, so here is the graphical representation:
+</p><p><img src="http://ealdent.files.wordpress.com/2007/10/sierpca.png" alt="Sierpinski triangle made with cellular automata" /></p>
+<p align="justify">So with just those simple rules we could construct a fractal known as the Sierpinski triangle.  Pretty frickin sweet.  In Wolfram's nomenclature, this is cellular automaton 90 (since the rule outputs form the binary number 01011010 = 90).  I hacked together some quick python code to display such cellular automata given the size of the neighborhood and the Wolfram number for the automaton you want.</p>
+<p align="justify">&nbsp;</p>
+<p align="justify">So to run the code below for the Sierpinksi triangle for 40 cycles (recommended), you'd use the format:</p>
+<p align="justify">&nbsp;</p>
+<p align="center">python ca.py 3 90 40</p>
+<p align="justify">&nbsp;</p>
+<p align="justify">Download it <a href="http://www.cs.cmu.edu/~jmadams/source/ca.py" title="Cellular automata script in python following Wolfram's description in Chapter 2 of A New Kind of Science" target="_blank">here</a> since this sourcecode plugin isn't highly reliable and may have bugs in the output it shows you.</p>
+
+[sourcecode language='python']
+# cellular automaton
+
+__version__ = "0.1"
+__author__ = "Jason Michael Adams (jmadams@cs.cmu.edu)"
+
+import math
+import sys
+
+class CellularAutomaton(object):
+   """Usage: CellularAutomaton(boardSize, ruleSize, automatonNumber)
+
+   """
+
+   def __init__(self, size, rule_size, effects, initial_board=None,alpha=None):
+      assert size % 2 == 1, "Size of board must be odd."
+      self.size = size
+      self.time = 0
+      self.rule_size = rule_size
+      rules = list()
+      for x in xrange(2 ** rule_size):
+         rules.append(make_binary_rep(x, rule_size))
+      rules.reverse()
+      ex = make_binary_rep(effects, 2 ** rule_size)
+      self.rules = RuleSet(rules, ex)
+      self.board = dict()
+      if alpha is None:
+         self.alpha = [0,1]
+      else:
+         self.alpha = alpha
+
+      self.board[0] = self._init_board(initial_board)
+      if initial_board is None:
+         self.board[0][self.size / 2] = self.alpha[1]
+
+   def increment(self):
+      self.time += 1
+      self.board[self.time] = self._init_board()
+
+      for x in xrange(self.size):
+         context = list()
+         rn = self.rule_size / 2
+         for y in xrange(self.rule_size):
+            context.append(self.board[self.time - 1][(x + y - rn) % self.size])
+
+         self.board[self.time][x] = self.rules * context
+
+      return self.board[self.time]
+
+   def run(self, cycles):
+      for x in xrange(cycles):
+         tmp = self.increment()
+
+      print self
+
+   def _init_board(self, initial_board=None):
+      if initial_board is None:
+         board = list()
+         for x in xrange(self.size):
+            board.append(self.alpha[0])
+         board[self.size / 2] = self.alpha[1]
+      else:
+         assert len(initial_board) == size, "Size of initial board setting must be equal to size of board."
+         board = initial_board
+
+      return board
+
+   def __repr__(self):
+      keys = self.board.keys()
+      keys.sort()
+      tmps = list()
+      for key in keys:
+         tmps.append(self.__repb__(key))
+      return '\n'.join(tmps)
+
+   def __repb__(self, b):
+      board = self.board[b]
+      tmp = ""
+      for x in xrange(len(self.board[b])):
+         tmp += str(self.board[b][x])
+      return tmp
+
+class Rule(object):
+   """Usage:  Rule(rule, effect)
+
+   The rule parameter is a odd-length list indicating the
+   prior pattern that will trigger the single value in
+   effect.  The effect parameter should be anything that
+   has a string representation.
+   """
+
+   def __init__(self, rule, effect):
+      assert len(rule) % 2 == 1, "Size of rule must be odd."
+      self.rule = rule
+      self.effect = effect
+      self.size = len(rule)
+
+   def __mul__(self, context):
+      assert len(context) == self.size, "Size of context must be equal to size of the rule (%d)." % (self.size)
+
+      accept = True
+
+      for x in xrange(len(context)):
+         if self.rule[x] != context[x]:
+            accept = False
+            break
+
+      if accept is True:
+         return self.effect
+      else:
+         return None
+
+   def __repr__(self):
+      return "%s => %s" % (str(self.rule), self.effect)
+
+class RuleSet(object):
+   """A set of Rule objects that can be applied to
+   a given context.
+   """
+
+   def __init__(self, rules, effects):
+      self.rules = list()
+      for rx in xrange(len(rules)):
+         r = Rule(rules[rx], effects[rx])
+         self.rules.append(r)
+
+   def __mul__(self, context):
+      middle = context[len(context) / 2]
+      for rule in self.rules:
+         outp = rule * context
+         if outp is not None:
+            return outp
+      return middle
+
+   def __repr__(self):
+      return str(self.rules)
+
+def make_binary_rep(num, size=0):
+   outp = list()
+   if size < = 0:
+      size = int(round(math.log(num) / math.log(2)))
+   for x in xrange(size - 1, -1, -1):
+      if (num & (2 ** x)) > 0:
+         outp.append(1)
+      else:
+         outp.append(0)
+   return outp
+
+if __name__ == '__main__':
+   if len(sys.argv) < 4:
+      print "Usage: %s   <# cycles>" % (sys.argv[0])
+      sys.exit(0)
+   nhsize  = int(sys.argv[1])
+   autonum = int(sys.argv[2])
+   cycles  = int(sys.argv[3])
+   ca = CellularAutomaton(81, nhsize, autonum)
+   ca.run(cycles)[/sourcecode]
+<p align="justify">This is some pretty simple stuff, but I figured I'd post it in case anyone wanted a starting point or just something to play with.  There are also a number of things you can do to increase speed that I didn't bother with.  Please report bugs, etc.</p>

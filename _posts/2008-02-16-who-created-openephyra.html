@@ -1,0 +1,63 @@
+---
+layout: post
+title: "Who created OpenEphyra?"
+tags: ["cmu", "cmu", "computational linguistics", "computational linguistics", "information retrieval", "information retrieval", "lti", "lti", "natural language processing", "natural language processing", "open source", "open source", "openephyra", "openephyra", "qa", "qa", "question answering", "question answering", "software", "software"]
+---
+<p align="justify"><a href="http://www.ephyra.info" target="_blank">OpenEphyra</a> is a question answering (QA) system developed here at the Language Technologies Institute by Nico Schlaefer.  He began his work at the University of Karlsruhe in Germany, but has since continued it at CMU and is currently a PhD student here.  Since it is a home-grown language technologies package, I decided to check it out and play around. This is the first QA system I have used that wasn't integrated in a search engine, so this isn't exactly an expert review.</p>
+<p align="justify">Getting started in Windows (or Linux or whatever) is pretty easy if you already have <a href="http://ant.apache.org/" target="_blank">Apache ant</a> and Java installed.  Ant isn't necessary, but I recommend getting it if you don't have it already.  It's just handy.  First, <a href="http://sourceforge.net/project/showfiles.php?group_id=216491" target="_blank">download the OpenEphyra package</a> from sourceforge.  The download is about 59 MB and once it's done unpack it in whatever directory you want.  Assuming you have ant installed, all you have to do is type <code>ant</code> to build it, though you may want to issue <code>ant clean</code> first.  I had to make one slight change to the build.xml file to get it to run, which was on line 55: <code>&lt;jvmarg line="-server&amp; #13;-Xms512m&amp; #13;-Xmx1024m"/&gt;</code>, which had to be changed to <code>&lt;jvmarg line="-server -Xms512m -Xmx1024m"/&gt;</code>.  Easy enough.   Then to run it, all you have to do is type <code>ant OpenEphyra</code>.</p>
+<p align="justify">After taking a short bit to load up, you can enter questions on the command line.  Based on what I can tell from the output, it begins by normalizing the question (removing morphology, getting rid of punctuation).   Then it determines the type of answer it is looking for, like a person's name or a place and assigns certain properties to what it expects to find.  Next it automatically creates a list of queries that are sent to the search engine(s).  The documentation indicates that the AQUAINT, AQUAINT-2 and BLOG06 corpora are included (at least preprocessing is supported), but there are searchers for Google, Wikipedia, Yahoo and several others.  Indri is a search engine which supports structured queries and OpenEphyra auto-generates some structured queries from what I saw playing around.   After generating the queries, they are sent to the various searchers and results are obtained and scored.  Finally, if you're lucky, you get an answer to your question.</p>
+Here are the results of screwing around with it for a few minutes:
+<ul>
+	<li>Who created OpenEphyra?
+<ul>
+	<li>no answer (sorry, Nico)</li>
+</ul>
+</li>
+	<li>Who invented the cotton gin?
+<ul>
+	<li>Eli Whitney</li>
+</ul>
+</li>
+	<li>Who created man?
+<ul>
+	<li>God</li>
+</ul>
+</li>
+	<li>What is the capital of Mongolia?
+<ul>
+	<li>Ulaanbaatar</li>
+</ul>
+</li>
+	<li>Who invented the flux capacitor?
+<ul>
+	<li>Doc Brown (awesome!)</li>
+</ul>
+</li>
+	<li>Who is the author of the Mendicant Bug?
+<ul>
+	<li>Zuckerberg -- damn you, Facebook! :(</li>
+</ul>
+</li>
+	<li>How much wood can a woodchuck chuck?
+<ul>
+	<li>no answer (correct)</li>
+</ul>
+</li>
+	<li>What is the atomic number of Curium?
+<ul>
+	<li>96 (also correct)</li>
+</ul>
+</li>
+	<li>Who killed Lord Voldemort?
+<ul>
+	<li>Harry (correct, but partial)</li>
+</ul>
+</li>
+	<li>How many rings for elven kings?
+<ul>
+	<li>3021 (so, so very wrong)</li>
+</ul>
+</li>
+</ul>
+<p align="justify">Fun stuff!  It's not anywhere near perfect, but there are definite uses and the thing is ridiculously easy to install and use.  Also, it's in Java, so you can integrate it with your own system with very little effort.   Depending on what sort of question you are looking for answers to, you get various levels of results.  Factual questions about geography and people tend to do better than questions about numbers and fiction, as you might expect.  Also, why-questions are not supported.</p>
+<p align="justify">Another bonus is the project is open source, so if you're into QA, you can help develop it.</p>
