@@ -33,9 +33,9 @@ def parse_entry(entry):
     if entry.has_key('tags'):
         tags = [tag['term'] for tag in entry.tags if tag['term'] != u'Uncategorized']
     else:
-        tags = list()
+        tags = [u'Uncategorized']
     content = entry.content[0].value
-    link = "_posts/" + entry.link.split(".com")[1][1:].replace("/", "-")
+    link = "_posts/" + entry.link.split(".com")[1][1:-1].replace("/", "-")
     
     print "Processing entry:  %s" % (title)
     
