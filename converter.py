@@ -52,7 +52,7 @@ def parse_entry(entry):
     else:
         print "*******************************************************************************"
     f.write(u"---\n")
-    f.write(u"Original post can be found at:  <a href=\"%s\" target=\"_blank\">%s</a><br /><br />\n%s\n" % (original_link, original_link, content))
+    f.write(u"<hr>Original post can be found at:  <a href=\"%s\" target=\"_blank\">%s</a><br /><br />\n%s\n" % (original_link, original_link, content))
 
     f.close()
     

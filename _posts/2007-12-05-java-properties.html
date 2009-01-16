@@ -3,7 +3,7 @@ layout: post
 title: "Java Properties"
 tags: ["code", "code", "java", "java", "java tips", "java tips", "programming", "programming", "properties", "properties", "settings", "settings", "software projects", "software projects"]
 ---
-Original post can be found at:  <a href="http://ealdent.wordpress.com/2007/12/05/java-properties/" target="_blank">http://ealdent.wordpress.com/2007/12/05/java-properties/</a><br /><br />
+<hr>Original post can be found at:  <a href="http://ealdent.wordpress.com/2007/12/05/java-properties/" target="_blank">http://ealdent.wordpress.com/2007/12/05/java-properties/</a><br /><br />
 <p align="justify">I discovered the <code>java.util.Properties</code> class a couple weeks ago in the ginormous Java API docs.  If you've ever created a software project where you have a lot of different settings that change frequently, this is the class for you.  In my research, I implement all these different algorithms for various things, find out they don't work, implement something else, rinse, repeat.  Being able to look back at my results from two months ago and then loading the exact same configuration and running the experiment all over again is a must.  Enter the <code>Properties</code> class.<!--more--></p>
 <p align="justify"><strike>So this is new in version Java SE 6 (according to the javadocs at least).</strike>  This has been around since JDK 1.0 (<em>update, see comments</em>).  I had originally written my own program to do this.  That was nice, but time-consuming and annoying.  This class is more thorough, robust, and flexible.  Basically you just create a text file (assuming you want to load from file) with properties in the following format:</p>
 
