@@ -1,0 +1,1 @@
+RedirectMatch 301 ([0-9]+/[0-9]+/[0-9]+/.*)/ http://ealdent.github.com$1.html
