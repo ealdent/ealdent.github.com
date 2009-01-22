@@ -1,2 +1,2 @@
-RewriteRule /$ .html
+RewriteRule (.*)/$ $1.html
 RewriteRule [A-Za-z]+/$ $1.html
