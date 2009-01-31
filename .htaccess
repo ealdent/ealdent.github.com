@@ -1,1 +1,8 @@
-RewriteRule ^/([0-9]+)/([0-9]+)/([0-9]+)/(.*)/$ /$1/$2/$3/$4.html
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RedirectMatch 301 /(.*)/(.*)/ http://ealdent.github.com/$2.html
+RedirectMatch 301 / http://ealdent.github.com/
+</IfModule>
